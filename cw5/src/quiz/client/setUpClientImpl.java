@@ -32,8 +32,7 @@ public class setUpClientImpl implements setUpClient, Serializable {
         System.out.println("5) Shutdown server");
         Scanner sc = new Scanner(System.in);
 
-        Registry myRegistry = null;
-        myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
+        Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
         quizServer impl = (quizServer) myRegistry.lookup("myQuiz");
         int choice = sc.nextInt();
         if (choice == 1) {
@@ -41,11 +40,13 @@ public class setUpClientImpl implements setUpClient, Serializable {
             String quizName = sc.next();
             impl.addQuiz();
         } else if (choice == 2) {
-            impl.addQuestion();
+            System.out.println("enter quiz ID to add question to");
+            int ID = sc.nextInt();
+            impl.addQuestion(ID);
         } else if (choice == 3) {
             System.out.println("enter quiz ID to be deleted");
             int ID = sc.nextInt();
-            impl.deleteQuestion();
+            impl.deleteQuestion(ID);
             deleteQuiz(ID);
         } else if (choice == 4) {
             impl.deleteQuiz();

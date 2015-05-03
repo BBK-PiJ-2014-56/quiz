@@ -28,6 +28,10 @@ public class DataIO {
             QuizFile.createNewFile();
     }
 
+    public DataIO(ArrayList<quizImpl> ql) {
+        writeToFile(ql);
+    }
+
     public ArrayList<quizImpl> readFile() {
 
         // The name of the file to open.
@@ -76,12 +80,12 @@ public class DataIO {
         return quizArray;
     }
 
-    public void writeToFile() {
+    public void writeToFile(ArrayList<quizImpl> ql) {
         Path path = Paths.get("Quizzes.txt");
         try (Scanner scanner = new Scanner(path, String.valueOf(ENCODING))) {
             try (BufferedWriter writer = Files.newBufferedWriter(path, ENCODING)) {
-                String toBeWritten = null;
-                for (quizImpl q : quizArray) {
+                String toBeWritten;
+                for (quizImpl q : ql) {
                     String questionsString = "";
                     //gets a list of questions for that quiz
                     List<QuestionAndAnswer> questions = q.getQuestions();
@@ -100,6 +104,7 @@ public class DataIO {
                     writer.write(toBeWritten);
                     writer.newLine();
                 }
+                writer.close();
             }
         } catch (IOException e) {
             e.printStackTrace();

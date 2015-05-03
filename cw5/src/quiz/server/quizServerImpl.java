@@ -31,28 +31,28 @@ public class quizServerImpl extends UnicastRemoteObject implements quizServer {
     }
 
     @Override
-    public void getQuiz() {
+    public quizImpl getQuiz(int ID) {
+        return quizList.get(ID-1);
+    }
+
+    @Override
+    public void addQuestion(int ID) {
 
     }
 
     @Override
-    public void addQuestion() {
+    public void deleteQuestion(int ID) {
 
     }
 
     @Override
-    public void deleteQuestion() {
-
+    public int getHighScore(int ID) {
+        return quizList.get(ID-1).getHighScore();
     }
 
     @Override
-    public void getHighScore() {
-
-    }
-
-    @Override
-    public void setHighScore() throws RemoteException {
-
+    public void setHighScore(ArrayList<quizImpl> quizList) throws RemoteException {
+        this.quizList = quizList;
     }
 
     @Override
@@ -62,15 +62,12 @@ public class quizServerImpl extends UnicastRemoteObject implements quizServer {
 
     @Override
     public void exit() throws RemoteException {
+        DataIO ioWrite = new DataIO(quizList);
         try{
             Naming.unbind("myQuiz");
             UnicastRemoteObject.unexportObject(this, true);
             System.out.println("Quiz server exiting.");
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (NotBoundException e) {
+        } catch (RemoteException | MalformedURLException | NotBoundException e) {
             e.printStackTrace();
         }
     }

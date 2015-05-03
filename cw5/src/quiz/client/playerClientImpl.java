@@ -47,12 +47,9 @@ public class playerClientImpl implements playerClient, Serializable{
             int currentScore = playQuiz(quizChoice);
             if (currentScore>quizList.get(quizChoice-1).getHighScore()) {
                 quizList.get(quizChoice-1).newHighScore(p.getPlayerName(), currentScore);
-
-                //Need to find a way to send this to server
-
-
-
+                System.out.println("congratulations new high score!");
             }
+            impl.setHighScore(quizList);
 
         } catch (Exception e) {
 

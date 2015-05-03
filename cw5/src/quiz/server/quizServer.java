@@ -11,17 +11,17 @@ public interface quizServer extends Remote {
 
     void addQuiz() throws RemoteException;
 
-    void getQuiz() throws RemoteException;
+    quizImpl getQuiz(int ID) throws RemoteException;
 
     ArrayList<quizImpl> getQuizList() throws RemoteException;
 
-    void addQuestion() throws RemoteException;
+    void addQuestion(int ID) throws RemoteException;
 
-    void deleteQuestion() throws RemoteException;
+    void deleteQuestion(int ID) throws RemoteException;
 
-    void getHighScore() throws RemoteException;
+    int getHighScore(int ID) throws RemoteException;
 
-    void setHighScore() throws RemoteException;
+    void setHighScore(ArrayList<quizImpl> quizList) throws RemoteException;
 
     void exit() throws RemoteException;
 
