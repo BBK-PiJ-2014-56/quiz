@@ -10,7 +10,7 @@ public class quizServerLauncher {
     private void startServer(){
         try {
             Registry registry = LocateRegistry.createRegistry(1099);
-            registry.rebind("myquiz", new quizServerImpl());
+            registry.rebind("myQuiz", new quizServerImpl());
 
         } catch (Exception e) {
             e.printStackTrace();

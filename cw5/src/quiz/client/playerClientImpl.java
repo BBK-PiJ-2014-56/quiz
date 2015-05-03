@@ -1,6 +1,6 @@
 package quiz.client;
 
-import quiz.server.QuestionAndAnswer;
+//import quiz.server.QuestionAndAnswer;
 import quiz.server.*;
 
 import java.io.Serializable;
@@ -36,7 +36,7 @@ public class playerClientImpl implements playerClient, Serializable{
             System.out.println("choose what quiz you would like to play " + playerName);
 
             Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
-            quizServer impl = (quizServer) myRegistry.lookup("myquiz");
+            quizServer impl = (quizServer) myRegistry.lookup("myQuiz");
 
             quizList = impl.getQuizList();
 
@@ -47,6 +47,11 @@ public class playerClientImpl implements playerClient, Serializable{
             int currentScore = playQuiz(quizChoice);
             if (currentScore>quizList.get(quizChoice-1).getHighScore()) {
                 quizList.get(quizChoice-1).newHighScore(p.getPlayerName(), currentScore);
+
+                //Need to find a way to send this to server
+
+
+
             }
 
         } catch (Exception e) {

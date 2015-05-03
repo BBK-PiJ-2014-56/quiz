@@ -1,6 +1,9 @@
 package quiz.server;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -15,13 +18,6 @@ public class quizServerImpl extends UnicastRemoteObject implements quizServer {
     protected quizServerImpl() throws IOException {
         DataIO io = new DataIO();
         quizList = io.readFile();
-    }
-
-    public String echo(String s) {
-        // This println is not necessary, but helps verifying whether
-        // the server has received the call or not on the remote machine
-        System.out.println("Replied to some client saying ’" + s + "’");
-        return s;
     }
 
     @Override
@@ -52,5 +48,30 @@ public class quizServerImpl extends UnicastRemoteObject implements quizServer {
     @Override
     public void getHighScore() {
 
+    }
+
+    @Override
+    public void setHighScore() throws RemoteException {
+
+    }
+
+    @Override
+    public void deleteQuiz() throws RemoteException {
+
+    }
+
+    @Override
+    public void exit() throws RemoteException {
+        try{
+            Naming.unbind("myQuiz");
+            UnicastRemoteObject.unexportObject(this, true);
+            System.out.println("Quiz server exiting.");
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -5,7 +5,7 @@ import java.rmi.Remote;
 /**
  * Created by jimjohn_thornton on 19/04/15.
  */
-public interface playerClient extends Remote{
+public interface playerClient extends Remote {
 
     //starts game
     void startGame();
@@ -17,4 +17,5 @@ public interface playerClient extends Remote{
 
     //shows score
     void getFinalScore();
+
 }

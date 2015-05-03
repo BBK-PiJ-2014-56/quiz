@@ -21,4 +21,9 @@ public interface quizServer extends Remote {
 
     void getHighScore() throws RemoteException;
 
+    void setHighScore() throws RemoteException;
+
+    void exit() throws RemoteException;
+
+    void deleteQuiz() throws RemoteException;
 }
