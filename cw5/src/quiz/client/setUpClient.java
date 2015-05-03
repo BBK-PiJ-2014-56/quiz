@@ -15,4 +15,6 @@ public interface setUpClient {
     void editQuiz();
 
     void deleteQuiz(int ID);
+
+    //void addQuestion(String quizName);
 }

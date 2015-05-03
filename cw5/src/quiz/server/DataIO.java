@@ -57,12 +57,20 @@ public class DataIO {
                     //splits the line into an array of strings
                     String[] stringArray = s.split(",");
                     //If game already has a highScore
-                    if (stringArray[stringArray.length - 3].equals("highScore")) {
-                        quizImpl q = new quizImpl(stringArray[1], stringArray[stringArray.length - 2], Integer.parseInt(stringArray[stringArray.length - 1]));
-                        for (int i = 2; i < stringArray.length - 3; i = i + 6) {
-                            q.addQuestion(stringArray[i], stringArray[i + 1], stringArray[i + 2], stringArray[i + 3], stringArray[i + 4], Integer.parseInt(stringArray[i + 5]));
+                    if (stringArray.length > 3) {
+                        if (stringArray[stringArray.length - 3].equals("highScore")) {
+                            quizImpl q = new quizImpl(stringArray[1], stringArray[stringArray.length - 2], Integer.parseInt(stringArray[stringArray.length - 1]));
+                            for (int i = 2; i < stringArray.length - 3; i = i + 6) {
+                                q.addQuestion(stringArray[i], stringArray[i + 1], stringArray[i + 2], stringArray[i + 3], stringArray[i + 4], Integer.parseInt(stringArray[i + 5]));
+                            }
+                            quizArray.add(q);
+                        } else {
+                            quizImpl q = new quizImpl(stringArray[1]);
+                            for (int i = 2; i < stringArray.length; i = i + 6) {
+                                q.addQuestion(stringArray[i], stringArray[i + 1], stringArray[i + 2], stringArray[i + 3], stringArray[i + 4], Integer.parseInt(stringArray[i + 5]));
+                            }
+                            quizArray.add(q);
                         }
-                        quizArray.add(q);
                     } else {
                         quizImpl q = new quizImpl(stringArray[1]);
                         for (int i = 2; i < stringArray.length; i = i + 6) {

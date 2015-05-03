@@ -31,25 +31,78 @@ public class setUpClientImpl implements setUpClient, Serializable {
         System.out.println("4) Delete a quiz");
         System.out.println("5) Shutdown server");
         Scanner sc = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
 
         Registry myRegistry = LocateRegistry.getRegistry("127.0.0.1", 1099);
         quizServer impl = (quizServer) myRegistry.lookup("myQuiz");
         int choice = sc.nextInt();
         if (choice == 1) {
             System.out.println("enter quiz name");
-            String quizName = sc.next();
-            impl.addQuiz();
+            String quizName = sc2.nextLine();
+            impl.addQuiz(quizName);
+            System.out.println("do you want to add any questions at this point? press Y or N");
+            String addq = sc2.nextLine();
+            if (addq.equals("Y")) {
+                while (addq.equals("Y")) {
+                    System.out.println("Type in a question ");
+                    String question = sc2.nextLine();
+                    System.out.println("type in the first of 4 possible answers");
+                    String a1 = sc2.nextLine();
+                    System.out.println("type in the second of 4 possible answers");
+                    String a2 = sc2.nextLine();
+                    System.out.println("type in the third of 4 possible answers");
+                    String a3 = sc2.nextLine();
+                    System.out.println("type in the final answer");
+                    String a4 = sc2.nextLine();
+                    System.out.println("which answer is correct? enter a number 1 to 4");
+                    int correctAnswer = sc2.nextInt();
+                    impl.addQuestion(quizName, question, a1, a2, a3, a4, correctAnswer);
+                    System.out.println("do you want to add another question, Press Y or N");
+                    addq = sc2.nextLine();
+                }
+            }
+            System.out.println("Quiz added");
         } else if (choice == 2) {
-            System.out.println("enter quiz ID to add question to");
-            int ID = sc.nextInt();
-            impl.addQuestion(ID);
+            boolean addq = true;
+            System.out.println("enter the quiz name to add a question to");
+            //String quizName1 = sc.nextLine();
+            String quizName = sc2.nextLine();
+            System.out.println(quizName);
+            //System.out.println(quizName1);
+            quizImpl q = impl.getQuiz(quizName);
+
+            if (q == null) {
+                System.out.println("not a quiz name");
+                addq = false;
+            }
+            while (addq == true) {
+                System.out.println("Type in a question ");
+                String question = sc2.nextLine();
+                System.out.println("type in the first of 4 possible answers");
+                String a1 = sc2.nextLine();
+                System.out.println("type in the second of 4 possible answers");
+                String a2 = sc2.nextLine();
+                System.out.println("type in the third of 4 possible answers");
+                String a3 = sc2.nextLine();
+                System.out.println("type in the final answer");
+                String a4 = sc2.nextLine();
+                System.out.println("which answer is correct? enter a number 1 to 4");
+                int correctAnswer = sc2.nextInt();
+                impl.addQuestion(quizName, question, a1, a2, a3, a4, correctAnswer);
+                System.out.println("do you want to add another question, Press Y or N");
+                String more = sc2.nextLine();
+                if (!more.equals("Y"))
+                    addq = false;
+            }
+
         } else if (choice == 3) {
-            System.out.println("enter quiz ID to be deleted");
-            int ID = sc.nextInt();
-            impl.deleteQuestion(ID);
-            deleteQuiz(ID);
+            System.out.println("enter quiz name to be delete a question from");
+            String quizName = sc.next();
+            impl.deleteQuestion(quizName);
         } else if (choice == 4) {
-            impl.deleteQuiz();
+            System.out.println("enter quiz name to be delete");
+            String quizName = sc.next();
+            impl.deleteQuiz(quizName);
         } else if (choice == 5) {
             impl.exit();
         } else {
@@ -67,7 +120,27 @@ public class setUpClientImpl implements setUpClient, Serializable {
     public void deleteQuiz(int ID) {
 
     }
+/*
+    @Override
+    public void addQuestion(String quizName) {
+        Scanner sc = new Scanner();
+        System.out.println("Type in a question ");
+        String question = sc.next();
+        System.out.println("type in the first of 4 possible answers");
+        String a1 = sc.next();
+        System.out.println("type in the second of 4 possible answers");
+        String a2 = sc.next();
+        System.out.println("type in the third of 4 possible answers");
+        String a3 = sc.next();
+        System.out.println("type in the final answer");
+        String a4 = sc.next();
+        System.out.println("which answer is correct? enter a number 1 to 4");
+        int correctAnswer = sc.nextInt();
+        //impl.addQuestion(quizName, question, a1, a2, a3, a4, correctAnswer);
+    }
 
+    }
+*/
     @Override
     public void createQuiz(String quizName) {//, List<QuestionAndAnswer> questionAndAnswers, List<Answer> answers) {
 

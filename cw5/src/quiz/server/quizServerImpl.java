@@ -26,28 +26,37 @@ public class quizServerImpl extends UnicastRemoteObject implements quizServer {
     }
 
     @Override
-    public void addQuiz() {
-
+    public void addQuiz(String quizName) {
+        quizList.add(new quizImpl(quizName));
     }
-
+/*
     @Override
     public quizImpl getQuiz(int ID) {
         return quizList.get(ID-1);
     }
+*/
+    @Override
+    public quizImpl getQuiz(String quizName) throws RemoteException {
+        for (quizImpl q : quizList)
+            if (q.getQuizName().equals(quizName))
+                return q;
+        System.out.println("quiz not found");
+        return null;
+    }
 
     @Override
-    public void addQuestion(int ID) {
+    public void addQuestion(String quizName, String question, String a1, String a2, String a3, String a4, int correctAnswer) throws RemoteException {
+        getQuiz(quizName).addQuestion(question, a1, a2, a3, a4, correctAnswer);
+    }
+
+    @Override
+    public void deleteQuestion(String quizName) {
 
     }
 
     @Override
-    public void deleteQuestion(int ID) {
-
-    }
-
-    @Override
-    public int getHighScore(int ID) {
-        return quizList.get(ID-1).getHighScore();
+    public int getHighScore(String quizName) throws RemoteException {
+        return getQuiz(quizName).getHighScore();
     }
 
     @Override
@@ -56,7 +65,7 @@ public class quizServerImpl extends UnicastRemoteObject implements quizServer {
     }
 
     @Override
-    public void deleteQuiz() throws RemoteException {
+    public void deleteQuiz(String quizName) throws RemoteException {
 
     }
 

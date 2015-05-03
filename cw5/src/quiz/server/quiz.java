@@ -9,6 +9,8 @@ public interface quiz {
 
     String getQuizName();
 
+    //int getID();
+
     List<QuestionAndAnswer> getQuestions();
 
     void addQuestion(String question, String a1, String a2, String a3, String a4, int x);
