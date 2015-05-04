@@ -4,17 +4,15 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 /**
- * Created by jimjohn_thornton on 19/04/15.
+ * This class is used to edit quizzes stored on the server and shutdown the server
+ * @author Created by James Thornton on 19/04/15.
  */
 public interface setUpClient {
-    void createQuiz(String quizName);//, List<QuestionAndAnswer> questionAndAnswers, List<Answer> answers);
-    void closeQuiz(int ID);
-
+    /**
+     * starts the editor
+     * @throws RemoteException
+     * @throws NotBoundException
+     */
     void startEditor() throws RemoteException, NotBoundException;
 
-    void editQuiz();
-
-    void deleteQuiz(int ID);
-
-    //void addQuestion(String quizName);
 }

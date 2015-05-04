@@ -11,7 +11,7 @@ import java.rmi.registry.Registry;
 import java.util.Scanner;
 
 /**
- * Created by jimjohn_thornton on 19/04/15.
+ * @author James Thornton on 19/04/15.
  */
 public class setUpClientImpl implements setUpClient, Serializable {
 
@@ -75,7 +75,7 @@ public class setUpClientImpl implements setUpClient, Serializable {
                 System.out.println("not a quiz name");
                 addq = false;
             }
-            while (addq == true) {
+            while (addq) {
                 System.out.println("Type in a question ");
                 String question = sc2.nextLine();
                 System.out.println("type in the first of 4 possible answers");
@@ -94,7 +94,6 @@ public class setUpClientImpl implements setUpClient, Serializable {
                 if (!more.equals("Y"))
                     addq = false;
             }
-
         } else if (choice == 3) {
             System.out.println("enter quiz name to be delete a question from");
             String quizName = sc.next();
@@ -109,45 +108,5 @@ public class setUpClientImpl implements setUpClient, Serializable {
             System.out.println("Make another choice");
             startEditor();
         }
-    }
-
-    @Override
-    public void editQuiz() {
-
-    }
-
-    @Override
-    public void deleteQuiz(int ID) {
-
-    }
-/*
-    @Override
-    public void addQuestion(String quizName) {
-        Scanner sc = new Scanner();
-        System.out.println("Type in a question ");
-        String question = sc.next();
-        System.out.println("type in the first of 4 possible answers");
-        String a1 = sc.next();
-        System.out.println("type in the second of 4 possible answers");
-        String a2 = sc.next();
-        System.out.println("type in the third of 4 possible answers");
-        String a3 = sc.next();
-        System.out.println("type in the final answer");
-        String a4 = sc.next();
-        System.out.println("which answer is correct? enter a number 1 to 4");
-        int correctAnswer = sc.nextInt();
-        //impl.addQuestion(quizName, question, a1, a2, a3, a4, correctAnswer);
-    }
-
-    }
-*/
-    @Override
-    public void createQuiz(String quizName) {//, List<QuestionAndAnswer> questionAndAnswers, List<Answer> answers) {
-
-    }
-
-    @Override
-    public void closeQuiz(int ID) {
-
     }
 }

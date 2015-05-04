@@ -9,7 +9,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 /**
- * Created by jimjohn_thornton on 19/04/15.
+ * @author James Thornton on 19/04/15.
  */
 public class quizServerImpl extends UnicastRemoteObject implements quizServer {
 
@@ -29,12 +29,7 @@ public class quizServerImpl extends UnicastRemoteObject implements quizServer {
     public void addQuiz(String quizName) {
         quizList.add(new quizImpl(quizName));
     }
-/*
-    @Override
-    public quizImpl getQuiz(int ID) {
-        return quizList.get(ID-1);
-    }
-*/
+
     @Override
     public quizImpl getQuiz(String quizName) throws RemoteException {
         for (quizImpl q : quizList)

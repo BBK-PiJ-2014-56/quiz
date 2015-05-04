@@ -23,15 +23,27 @@ public class DataIO {
     private int quizNo = 1;
     private int questionNo = 1;
 
+    /**
+     * checks to see if a file exists and creates one if it doesn't
+     * @throws IOException
+     */
     public DataIO() throws IOException {
         if (!QuizFile.isFile())
             QuizFile.createNewFile();
     }
 
+    /**
+     * starts the file writer
+     * @param ql a list of quizzes
+     */
     public DataIO(ArrayList<quizImpl> ql) {
         writeToFile(ql);
     }
 
+    /**
+     * reads data from the Quizzes file
+     * @return a list of quizzes
+     */
     public ArrayList<quizImpl> readFile() {
 
         // The name of the file to open.
@@ -88,6 +100,10 @@ public class DataIO {
         return quizArray;
     }
 
+    /**
+     * saves any changes to the quiz when server is shutdown
+     * @param ql a list of quizzes
+     */
     public void writeToFile(ArrayList<quizImpl> ql) {
         Path path = Paths.get("Quizzes.txt");
         try (Scanner scanner = new Scanner(path, String.valueOf(ENCODING))) {
