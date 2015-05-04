@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Scanner;
 
 /**
- * Created by jimjohn_thornton on 21/04/15.
+ * @author James Thornton on 21/04/15.
  */
 public class UI implements Serializable {
 
@@ -12,6 +12,12 @@ public class UI implements Serializable {
 
     private int currentAnswerNumber = 1;
     private int currentScore = 0;
+
+    /**
+     * takes a quiz and displays the question and allows them to answer
+     * not needed anymore
+     * @param quiz takes a quiz
+     */
     public UI(quizImpl quiz) {
         for (QuestionAndAnswer q : quiz.getQuestions()){
             System.out.println(q.getQuestion());
